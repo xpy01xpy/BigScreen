@@ -2,20 +2,23 @@
  * @Author: xpy
  * @Description: 布局
  * @Date: 2021-06-08 19:21:10
- * @LastEditTime: 2021-06-09 15:47:44
+ * @LastEditTime: 2021-06-09 17:57:08
 -->
 <template>
   <div class="app-warpper">
     <page-headers></page-headers>
+    <page-content></page-content>
   </div>
 </template>
 
 <script>
-import pageHeaders from './components/page-headers'
+import pageHeaders from './components/page-headers';
+import pageContent from './components/page-content';
 export default {
   name: 'App',
   components: {
     "page-headers":pageHeaders,
+    "page-content":pageContent,
   }
 }
 </script>
@@ -32,7 +35,6 @@ export default {
 }
 .app-warpper{
   font-size: 1rem;
-  border: 1px solid red;
   height: 100%;
 }
 </style>

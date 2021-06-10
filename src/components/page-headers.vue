@@ -2,13 +2,13 @@
  * @Author: xpy
  * @Description: 
  * @Date: 2021-06-09 15:45:57
- * @LastEditTime: 2021-06-09 17:07:40
+ * @LastEditTime: 2021-06-09 17:37:03
 -->
 <template>
   <div class="headers-warpper">
     {{titleText}}
     <div class="header-time">
-      {{date}}
+      当前时间：{{date}}
     </div>
   </div>
 </template>
@@ -20,25 +20,32 @@ export default {
   data(){
     return {
       titleText:'Data Visualization',
-      date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+      date: ""
     }
   },
   created() {
-    this.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
-    // new Date()
+    // 组件初始化赋值
+    this.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+  },
+  unmounted(){
+    // 组件销毁 清除计时器 防止内存泄漏
+    this.clearTimer()
   },
   watch:{
-    date(newDate,oldDate){
-      console.log(`newDate`, newDate)
-      console.log(`oldDate`, oldDate)
+    date(){
       this.timer = setInterval(this.getNewDate,1000);
     }
   },
   methods: {
     getNewDate(){
+      // 清除计时器
+      this.clearTimer()
+      // 更改最新值
+      this.date = moment(new Date()).format("YYYY-MM-DD  HH:mm:ss");
+    },
+    clearTimer(){
       clearInterval(this.timer)
-      this.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-    }
+    },
   },
 }
 </script>
@@ -59,9 +66,9 @@ export default {
 .header-time{
   position: absolute;
   top: 0;
-  right: 0;
+  right: .625rem;
+  font-size: .5rem;
 
-  border: 1px solid red;
   line-height: 1.125rem;
   height: 1.25rem;
   width: auto;
